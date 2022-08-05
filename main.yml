@@ -35,9 +35,6 @@ Parameters:
         Type: String
         Default: 10.0.3.0/24
 
-    ImageAmi:
-        Description: ami-id
-        Type: String
 
 
 Resources:

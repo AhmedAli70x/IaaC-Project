@@ -27,9 +27,6 @@ Parameters:
       in the second Availability Zone
     Type: String
     Default: 10.0.3.0/24
-  ImageAmi:
-    Description: ami-id
-    Type: String
 Resources:
   NetworkStack:
     Type: AWS::CloudFormation::Stack
@@ -42,7 +39,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     DependsOn: NetworkStack
     Properties:
-      TemplateURL: https://s3.us-east-1.amazonaws.com/s33final/2ef2b12b8d0c0c3a04bb16ef1a54dbff.template
+      TemplateURL: https://s3.us-east-1.amazonaws.com/s33final/bd2fcb5805e0ec8c8f4729f9b6b1f9f2.template
       Parameters:
         EnvironmentName:
           Ref: EnvironmentName
