@@ -43,7 +43,7 @@ Resources:
             ImageId: "ami-090fa75af13c156b4"      
             SecurityGroups:
                 - Ref: WebServerSecGroup
-            InstanceType: t2.micro
+            InstanceType: t3.small
             BlockDeviceMappings:
                 - DeviceName: "/dev/sdk"
                   Ebs:
@@ -101,7 +101,7 @@ Resources:
             HealthCheckProtocol: HTTP
             HealthCheckTimeoutSeconds: 8
             HealthyThresholdCount: 2
-            Port: 8080
+            Port: 80
             Protocol: HTTP
             UnhealthyThresholdCount: 5
             VpcId:
