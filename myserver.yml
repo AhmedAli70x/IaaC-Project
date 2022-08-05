@@ -1,7 +1,4 @@
-Parameters:
-    EnvironmentName:
-        Description: An environment name that will be prefixed to resource names
-        Type: String
+
 
 Resources:
     LBSecGroup:
@@ -110,3 +107,10 @@ Resources:
             VpcId:
                 Fn::ImportValue:
                     Fn::Sub: "${EnvironmentName}-VPCID"
+
+Outputs:
+
+    LoadBalancerUrl:
+        Description: The Public URL of the WebAppLB
+        Value: !Join ["", ["http://", !GetAtt WebAppLB.DNSName]]
+        
