@@ -34,56 +34,15 @@ Resources:
   NetworkStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://s3.us-east-1.amazonaws.com/s33final/9ebb09752d0358cc0c9b385dc4b1d8bc.template
+      TemplateURL: https://s3.us-east-1.amazonaws.com/s33final/3911a8098a11356a674684421111aa92.template
       Parameters:
         EnvironmentName:
           Ref: EnvironmentName
   ServerStack:
     Type: AWS::CloudFormation::Stack
+    DependsOn: NetworkStack
     Properties:
-      TemplateURL: https://s3.us-east-1.amazonaws.com/s33final/503ca8d7ca0186184aa2d18e98f43ce3.template
+      TemplateURL: https://s3.us-east-1.amazonaws.com/s33final/6cdaa4c4fe5cb5fbee55c737954396aa.template
       Parameters:
         EnvironmentName:
           Ref: EnvironmentName
-        ImageId:
-          Ref: ImageAmi
-      VPC:
-        Fn::GetAtt:
-        - NetworkStack
-        - Outputs.VPC
-      VPCPublicRouteTable:
-        Fn::GetAtt:
-        - NetworkStack
-        - Outputs.VPCPublicRouteTable
-      VPCPrivateRouteTable1:
-        Fn::GetAtt:
-        - NetworkStack
-        - Outputs.VPCPrivateRouteTable1
-      VPCPrivateRouteTable2:
-        Fn::GetAtt:
-        - NetworkStack
-        - Outputs.VPCPrivateRouteTable2
-      PublicSubnets:
-        Fn::GetAtt:
-        - NetworkStack
-        - Outputs.PublicSubnets
-      PrivateSubnets:
-        Fn::GetAtt:
-        - NetworkStack
-        - Outputs.PrivateSubnets
-      PublicSubnet1:
-        Fn::GetAtt:
-        - NetworkStack
-        - Outputs.PublicSubnet1
-      PublicSubnet2:
-        Fn::GetAtt:
-        - NetworkStack
-        - Outputs.PublicSubnet2
-      PrivateSubnet1:
-        Fn::GetAtt:
-        - NetworkStack
-        - Outputs.PrivateSubnet1
-      PrivateSubnet2:
-        Fn::GetAtt:
-        - NetworkStack
-        - Outputs.PrivateSubnet2

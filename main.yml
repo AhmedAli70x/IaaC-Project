@@ -40,8 +40,6 @@ Parameters:
         Type: String
 
 
-
-
 Resources:
 
     NetworkStack: 
@@ -54,33 +52,16 @@ Resources:
 
     ServerStack:
         Type: AWS::CloudFormation::Stack
+        
+        DependsOn: NetworkStack
+    
         Properties:
             
             TemplateURL: myserver.yml
             Parameters:
                 EnvironmentName: !Ref EnvironmentName
-                ImageId: !Ref ImageAmi
+    
 
-
-            # Dependencies
-            VPC: !GetAtt NetworkStack.Outputs.VPC
-            VPCPublicRouteTable: !GetAtt NetworkStack.Outputs.VPCPublicRouteTable
-            VPCPrivateRouteTable1: !GetAtt NetworkStack.Outputs.VPCPrivateRouteTable1
-            VPCPrivateRouteTable2: !GetAtt NetworkStack.Outputs.VPCPrivateRouteTable2
-            PublicSubnets: !GetAtt NetworkStack.Outputs.PublicSubnets
-            PrivateSubnets: !GetAtt NetworkStack.Outputs.PrivateSubnets
-            PublicSubnet1: !GetAtt NetworkStack.Outputs.PublicSubnet1
-            PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
-            PrivateSubnet1: !GetAtt NetworkStack.Outputs.PrivateSubnet1
-            PrivateSubnet2: !GetAtt NetworkStack.Outputs.PrivateSubnet2
-
-
-
-
-
-
-
-
-
+    
 
 

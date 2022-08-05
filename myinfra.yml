@@ -60,7 +60,6 @@ Resources:
             VpcId: !Ref VPC
 
 
-
     PublicSubnet1: 
         Type: AWS::EC2::Subnet
         Properties:
@@ -83,6 +82,7 @@ Resources:
                 - Key: Name 
                   Value: !Sub ${EnvironmentName} Public Subnet (AZ2)
 
+
     PrivateSubnet1: 
         Type: AWS::EC2::Subnet
         Properties:
@@ -104,8 +104,6 @@ Resources:
             Tags: 
                 - Key: Name 
                   Value: !Sub ${EnvironmentName} Private Subnet (AZ2)
-
-
 
     NatGateway1EIP:
         Type: AWS::EC2::EIP
@@ -130,7 +128,6 @@ Resources:
         Properties:
             AllocationId: !GetAtt NatGateway2EIP.AllocationId
             SubnetId: !Ref PublicSubnet2
-
 
     PublicRouteTable:
         Type: AWS::EC2::RouteTable
@@ -202,18 +199,6 @@ Resources:
         Properties:
             RouteTableId: !Ref PrivateRouteTable2
             SubnetId: !Ref PrivateSubnet2
-
-
-    # Choose a name of your choice
-    myDBSubnetGroup11:
-        Type: "AWS::RDS::DBSubnetGroup"
-        Properties: 
-            DBSubnetGroupDescription: "Subnets to use for the DB"
-            DBSubnetGroupName: "Subnet Group"
-            # Replace these IDs, as applicable to you
-            SubnetIds:
-                - subnet-0280d06d500615659
-                - subnet-0f699a7e2108da0e1
 
 
 
