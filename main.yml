@@ -1,0 +1,86 @@
+
+
+
+
+Parameters:
+
+    EnvironmentName:
+        Description: An environment name that will be prefixed to resource names
+        Type: String
+
+    VpcCIDR: 
+        Description: Please enter the IP range (CIDR notation) for this VPC
+        Type: String
+        Default: 10.0.0.0/16
+
+    PublicSubnet1CIDR:
+        Description: Please enter the IP range (CIDR notation) for the public subnet in the first Availability Zone
+        Type: String
+        Default: 10.0.0.0/24
+
+    PublicSubnet2CIDR:
+        Description: Please enter the IP range (CIDR notation) for the public subnet in the second Availability Zone
+        Type: String
+        Default: 10.0.1.0/24
+
+
+    PrivateSubnet1CIDR:
+        Description: Please enter the IP range (CIDR notation) for the private subnet in the first Availability Zone
+        Type: String
+        Default: 10.0.2.0/24
+
+
+    PrivateSubnet2CIDR:
+        Description: Please enter the IP range (CIDR notation) for the private subnet in the second Availability Zone
+        Type: String
+        Default: 10.0.3.0/24
+
+    ImageAmi:
+        Description: ami-id
+        Type: String
+
+
+
+
+Resources:
+
+    NetworkStack: 
+        Type: AWS::CloudFormation::Stack
+        Properties:
+            TemplateURL: myinfra.yml
+            Parameters:
+                EnvironmentName: !Ref EnvironmentName
+  
+
+    ServerStack:
+        Type: AWS::CloudFormation::Stack
+        Properties:
+            
+            TemplateURL: myserver.yml
+            Parameters:
+                EnvironmentName: !Ref EnvironmentName
+                ImageId: !Ref ImageAmi
+
+
+            # Dependencies
+            VPC: !GetAtt NetworkStack.Outputs.VPC
+            VPCPublicRouteTable: !GetAtt NetworkStack.Outputs.VPCPublicRouteTable
+            VPCPrivateRouteTable1: !GetAtt NetworkStack.Outputs.VPCPrivateRouteTable1
+            VPCPrivateRouteTable2: !GetAtt NetworkStack.Outputs.VPCPrivateRouteTable2
+            PublicSubnets: !GetAtt NetworkStack.Outputs.PublicSubnets
+            PrivateSubnets: !GetAtt NetworkStack.Outputs.PrivateSubnets
+            PublicSubnet1: !GetAtt NetworkStack.Outputs.PublicSubnet1
+            PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
+            PrivateSubnet1: !GetAtt NetworkStack.Outputs.PrivateSubnet1
+            PrivateSubnet2: !GetAtt NetworkStack.Outputs.PrivateSubnet2
+
+
+
+
+
+
+
+
+
+
+
