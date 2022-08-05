@@ -39,7 +39,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     DependsOn: NetworkStack
     Properties:
-      TemplateURL: https://s3.us-east-1.amazonaws.com/s33final/bd2fcb5805e0ec8c8f4729f9b6b1f9f2.template
+      TemplateURL: https://s3.us-east-1.amazonaws.com/s33final/1ecfbefed3bd048f18a5c0e65e42439f.template
       Parameters:
         EnvironmentName:
           Ref: EnvironmentName
